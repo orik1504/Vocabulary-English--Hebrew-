@@ -1,37 +1,37 @@
-# -- imports --#
-from datetime import datetime 
-from selenium import webdriver
-import atexit 
 import json
-from bidi.algorithm import get_display
+import datetime
+from bidi.algorithm import get_display 
+from selenium import webdriver
+import atexit
 
-# -- variables -- # 
-path = 'C:/Users/ori/Desktop/programing/chromedriver/chromedriver.exe'
-with open ('Vocabulary/values.json',encoding='utf8') as values:
-    values = json.load(values)
-print (values)
-print(get_display("נייר")) # flips the word 
 
-# -- enter values to json -- #
 
-# -- prints current time -- #
-now = datetime.now()
-current_time = now.strftime("%H:%M")
+# -- function that dumps value to json file -- #
+def write_in_json (translate , file ="Vocabulary/Vocabulary-English--Hebrew-/values.json"):
+    with open ("Vocabulary/Vocabulary-English--Hebrew-/values.json", "w") as new_file:
+        json.dump(translate,new_file)
 
-# -- webdriver --#
-wd = webdriver.Chrome(path)
-atexit.register(lambda: wd.quit())
-wd.get("https://www.morfix.co.il")
-
-# -- vocabulary class --#
-# class vocabulary:
-#     def __init__(self):
-#         pass
-#     def check_words(self,webdriver,values,id): #takes random words from webdribver and dump them into json file
-#         self.webdriver = webdriver
-#         self.values = values
-#         self.id = id
-        
+# -- open the file and into the "words" list and append the value that I gave -- #
+with open ("Vocabulary/Vocabulary-English--Hebrew-/values.json") as file:
+    data = json.load(file) #what I already saved (dict "words" have value of list)
+    in_data = data['words'] ##entering to "words" -  list of words in json fil
+    value = {"paper":"1"} #need to make another value every time
+    in_data.append(value) #append value to "words" list
     
-#     def dictation(self): #takes word from json file and asks for translation or spelling
-        
+
+print (in_data)
+
+# # # # # # # # # #
+# -- C H E C K -- #
+# # # # # # # # # #
+
+# -- get values to json file -- #
+# vlaue = "orange"
+# with open("Vocabulary/Vocabulary-English--Hebrew-/values.json",'w', encoding = 'utf8') as new_file: #open json file to write into as file
+#   in_file = file['words']
+#   in_file.append(vlaue)
+
+# with open("Vocabulary/Vocabulary-English--Hebrew-/values.json") as file:
+#     data = json.load(file) # dict "words" have value of list
+#     in_data = data['words'] #entering to "words" -  list of words in json file 
+# print (type(data))
