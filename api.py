@@ -7,18 +7,22 @@ class WordTranslationGenerator():
     TRANSLATION_CLASS = 'normal_translation_div'
     WORD_CLASS = 'Translation_spTop_heToen'
 
-    def __request(self,):
+    @staticmethod
+    def __request():
         """ Return morfix file string """
-        response = requests.get(self.URL)
+        response = requests.get(WordTranslationGenerator.URL)
         return BeautifulSoup(response.content,'lxml')
 
-    def __word_from_soup (self, soup):
-        return self.__text_by_element_class(soup, self.WORD_CLASS)
-
-    def __translation_from_soup (self, soup):
-        return self.__text_by_element_class(soup, self.TRANSLATION_CLASS)
+    @staticmethod
+    def __word_from_soup (soup):
+        return WordTranslationGenerator.__text_by_element_class(soup, WordTranslationGenerator.WORD_CLASS)
     
-    def __text_by_element_class(self, soup, class_name):
+    @staticmethod
+    def __translation_from_soup (soup):
+        return WordTranslationGenerator.__text_by_element_class(soup, WordTranslationGenerator.TRANSLATION_CLASS)
+    
+    @staticmethod
+    def __text_by_element_class(soup, class_name):
         
         element = soup.find(attrs={'class':class_name})
 
@@ -27,12 +31,13 @@ class WordTranslationGenerator():
 
         return element.getText().strip()
 
-    def word_translation(self):
-        soup = self.__request()
-        word = self.__word_from_soup(soup)
-        translation = self.__translation_from_soup(soup)
+    @staticmethod
+    def word_translation():
+        soup = WordTranslationGenerator.__request()
+        word = WordTranslationGenerator.__word_from_soup(soup)
+        translation = WordTranslationGenerator.__translation_from_soup(soup)
 
         if not all(item is not None for item in {word,translation}):
-            return self.word_translation()
+            return WordTranslationGenerator.word_translation()
         
         return (word,translation)
