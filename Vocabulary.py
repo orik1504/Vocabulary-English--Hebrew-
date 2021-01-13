@@ -51,28 +51,37 @@ class Database():
     
     
 class Dictations():
-    def print_out(self):
+    def print_last(self):
         """ Prints out the value of the last in json """
+    
+    def print_random(self,):
+        """ prints random value """
+
+    def print_list(self,):
+        """ prints list of words and values """
+    
+    def print_value(self,word):
+        """ print value of choosen word """
 
     def dictation(self):
         """ prints last 15 values in saturday for dictation """
         
+    def get_input(self, input):
+        """ gets the input from the user to the dictation """
 
-    def check_input (self):
+    def check_input (self) -> bool:
         """ Checks input of user """
-
 
     def right(self):
         """ Prints if all answers are right """
-
+        if self.check_input:
+            print ("You got it all right!")
     
     def wrong(self):
-        """ Prints that you had mistakes in dictation """
-        
+        """ Prints that you had mistakes in dictation """ 
     
     def try_again(self):
         """ Make a new try for the same dictatin """
-
 
     def where_mistake(self):
         """ prints where the mistakes are """
